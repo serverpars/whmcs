@@ -11,22 +11,16 @@ function hostcontrol_getConfigArray()
 {
     hostcontrol_install_db();
 
-    $revision           = "2014-02-18-rev.1";
-    $revision_url_check = "https://www.resello.com/static/whmcs/version.txt";
-    $download_text      = "Please visit <a href='https://www.resello.com/migration/downloads.html'
-                            target='_blank'>https://www.resello.com/migration/downloads.html</a> for
-                            the latest module version.";
-    $module_description = "Want to use the latest features? Stay up-to-date! " . $download_text;
+    $revision_date      = "2015-07-29";
+    $revision_url_check = "http://www.hostcontrol.com/whmcs/version.txt";
+    $download_text      = " <a href='http://www.hostcontrol.com/whmcs/latest.zip' target='_blank'>Click here to download the latest version</a>";
+    $visit_changelog    = " <a href='http://www.hostcontrol.com/whmcs/' target='_blank'>Review the changelog</a>";
 
     $configuration = array(
-        "Description" => array(
-            "Type" => "System",
-            "Value" => $module_description
-        ),
         "ApiKey" => array(
             "FriendlyName" => "API key",
             "Type" => "text",
-            "Description" => "You can find your API key in the Reseller Area, at the bottom of the Dashboard -> Label page."
+            "Description" => "You can find your API key in the Reseller Area, at the bottom of the Dashboard &rarr; Label page."
         ),
         "AlternativePort"	=> array(
             "FriendlyName" => "Use Alternative Connect Port",
@@ -40,33 +34,45 @@ function hostcontrol_getConfigArray()
             "FriendlyName" => "Use Debug Mode",
             "Type" => "yesno",
             "Description" => "Debug mode provides extensive information when an error occurs. "
-            . "This information will be logged at <i>Utilities -> Logs -> Module Logs</i>.<br />"
-            . "Only enable this if you want to investigate errors."
+            . "This information will be logged at <i>Utilities &rarr; Logs &rarr; Module Logs</i>.<br />"
+            . "Only enable this if you want to investigate errors.<br/><strong>Please note:</strong> "
+            . "Since WHMCS v6.x You have to click Enable Debug Logging first!"
         ),
         "VersionTag" => array(
-            "FriendlyName" => "Version",
-            "Description" => $revision,
+            "FriendlyName" => "Version date",
+            "Description" => $revision_date,
         ),
         "Updates" => array(
-            "Description" => "Please check our Downloads page regularly to see if there is a new version
+            "Description" => "Please check our site regularly to see if there is a new version
 							  of this registrar module available for you.<br />
-							  <a href='https://www.resello.com/migration/downloads.html' target='_blank'>
-								Open the downloads page in a new window
-							  </a>"
+							   - " . $download_text . "<br /> - " . $visit_changelog
         ),
     );
 
     $remote_version = @file_get_contents($revision_url_check);
-    if(! empty($remote_version) && trim($remote_version) != $revision)
+    if(! empty($remote_version))
     {
-        $configuration["Description"]["Value"] = "<span style='color: red; font-weight: bold;'>ATTENTION</span>:
-            An official update for your Hostcontrol module is available!<br />" . $download_text;
+        $current_version_date = date('Ymd', strtotime($revision_date));
+        $hostcontrol_version_date = date('Ymd', strtotime(substr($remote_version, 0, 10)));
+
+        if($hostcontrol_version_date > $current_version_date)
+        {
+            $configuration["Description"]["Value"] = "<span style='color: red; font-weight: bold;'>ATTENTION</span>:
+            An official update is available!<br />" . $download_text;
+        }
+        elseif($hostcontrol_version_date == $current_version_date)
+        {
+            $configuration["Description"]["Value"] = "<span style='color: darkgreen; font-weight: bold;'>Up-to-date</span>:
+            You are using the latest version of the module." . $visit_changelog;
+        }
     }
-    else if(! empty($remote_version) && trim($remote_version) == $revision)
+    else
     {
-		$configuration["Description"]["Value"] = "<span style='color: darkgreen; font-weight: bold;'>Up-to-date</span>:
-            You are using the latest version of the module.<br />" . $download_text;
-	}
+        $configuration["Description"] = array(
+                "Type" => "System",
+                "Value" => "Want to use the latest features? Stay up-to-date! " . $visit_changelog . " or " . $download_text
+        );
+    }
 
     return $configuration;
 }
@@ -130,26 +136,26 @@ function hostcontrol_RegisterDomain($params = array())
 
         return array('error' => $e->getMessage());
     }
-    
+
     /* It seems that domain registration succeeded, now update nameservers */
-	sleep(1.5);
+    sleep(1.5);
     $change_ns = hostcontrol_SaveNameservers($params);
     if($change_ns !== true)
     {
-		$error_msg = 'Nameserver not set because of 500 error';
-		if(is_array($change_ns) && array_key_exists('error', $change_ns))
-		{
-			$error_msg = $change_ns['error'];
-		}
-		
-		HostControlHelper::debugLog(
-			$params, 
-			'register-domain-set-nameserver',
-			'Set nameserver for just registered domain ' . $domainname,
-			$error_msg
-		);
-	}
-    
+        $error_msg = 'Nameserver not set because of 500 error';
+        if(is_array($change_ns) && array_key_exists('error', $change_ns))
+        {
+            $error_msg = $change_ns['error'];
+        }
+
+        HostControlHelper::debugLog(
+            $params,
+            'register-domain-set-nameserver',
+            'Set nameserver for just registered domain ' . $domainname,
+            $error_msg
+        );
+    }
+
     return true;
 }
 
@@ -166,12 +172,12 @@ function hostcontrol_TransferDomain($params)
 
     /* Get or create HostControl customer ID */
     try {
-		$hostcontrol_customer_id = HostControlHelper::get_or_create_hostcontrol_customer_id($params, $api_client);
-	}
-	catch(HostControlHelperError $e)
-	{
-		return array('error' => $e->getMessage());
-	}
+        $hostcontrol_customer_id = HostControlHelper::get_or_create_hostcontrol_customer_id($params, $api_client);
+    }
+    catch(HostControlHelperError $e)
+    {
+        return array('error' => $e->getMessage());
+    }
     $interval = $params["regperiod"]*12;
     $privacy_protect = (empty($params["idprotection"])?false:true);
     $authcode = (empty($params["transfersecret"])?'':$params["transfersecret"]);
@@ -436,6 +442,69 @@ function hostcontrol_SaveDNS($params)
 
     return true;
 }
+
+/**
+ * Get current status of registrar lock for domain, if tld has locking support
+ * @param $params
+ * @return array|string
+ */
+function hostcontrol_GetRegistrarLock($params)
+{
+    if(! HostControlHelper::tld_has_lock_support($params["tld"]))
+    {
+        return false;
+    }
+
+    $api_client = new HostControlAPIClient(HostControlHelper::getApiUrl($params), $params['ApiKey']);
+    $domainname = strtolower($params["sld"] . "." . $params["tld"]);
+
+    try
+    {
+        $domain_info = $api_client->domain->get($domainname);
+
+        return ((bool)$domain_info->extended->is_transfer_locked) ? 'locked' : 'unlocked';
+    }
+    catch(HostControlAPIClientError $e)
+    {
+        $request = array($domainname);
+        HostControlHelper::debugLog($params, 'domain-get', $request, $e);
+
+        return array('error' => $e->getMessage());
+    }
+}
+
+/**
+ * Save new state of Registrar lock, returns friendly error if TLD does not support registrar lock (like .nl)
+ * @param $params
+ * @return array|null
+ */
+function hostcontrol_SaveRegistrarLock($params)
+{
+    $api_client = new HostControlAPIClient(HostControlHelper::getApiUrl($params), $params['ApiKey']);
+    $domainname = strtolower($params["sld"] . "." . $params["tld"]);
+
+    try
+    {
+        HostControlHelper::debugLog($params, 'domain-update', $domainname, array(
+            'transfer_lock' => ($params['lockenabled'] == 'locked') ? true : false
+        ));
+
+        $api_client->domain->update($domainname, array(
+            'transfer_lock' => ($params['lockenabled'] == 'locked') ? true : false
+        ));
+    }
+    catch(HostControlAPIClientError $e)
+    {
+        $request = array($domainname);
+        HostControlHelper::debugLog($params, 'domain-update', $request, $e);
+
+        return array('error' => $e->getMessage());
+    }
+
+    return array();
+}
+
+
 
 /**
  * TransferSync function that is used every time the WHMCS cronjob runs.

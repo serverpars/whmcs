@@ -1,498 +1,579 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>HostControl WHMCS Module - README</title>
 
     <style>
-		
-	/* Space out content a bit */
-	body {
-	  padding-top: 20px;
-	  padding-bottom: 20px;
-	}
 
-	/* Everything but the jumbotron gets side spacing for mobile first views */
-	.header,
-	.marketing,
-	.footer {
-	  padding-left: 15px;
-	  padding-right: 15px;
-	}
+        /* Space out content a bit */
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
 
-	/* Custom page header */
-	.header {
-	  border-bottom: 1px solid #e5e5e5;
-	}
-	/* Make the masthead heading the same height as the navigation */
-	.header h3 {
-	  margin-top: 0;
-	  margin-bottom: 0;
-	  line-height: 40px;
-	  padding-bottom: 19px;
-	}
+        /* Everything but the jumbotron gets side spacing for mobile first views */
+        .header,
+        .marketing,
+        .footer {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
 
-	/* Custom page footer */
-	.footer {
-	  padding-top: 19px;
-	  color: #777;
-	  border-top: 1px solid #e5e5e5;
-	}
+        /* Custom page header */
+        .header {
+            border-bottom: 1px solid #e5e5e5;
+        }
 
-	/* Customize container */
-	@media (min-width: 768px) {
-	  .container {
-		max-width: 730px;
-	  }
-	}
-	.container-narrow > hr {
-	  margin: 30px 0;
-	}
+        /* Make the masthead heading the same height as the navigation */
+        .header h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 40px;
+            padding-bottom: 19px;
+        }
 
-	/* Main marketing message and sign up button */
-	.jumbotron {
-	  text-align: center;
-	  border-bottom: 1px solid #e5e5e5;
-	}
-	.jumbotron .btn {
-	  font-size: 21px;
-	  padding: 14px 24px;
-	}
+        /* Custom page footer */
+        .footer {
+            padding-top: 19px;
+            color: #777;
+            border-top: 1px solid #e5e5e5;
+        }
 
-	/* Supporting marketing content */
-	.marketing {
-	  margin: 40px 0;
-	}
-	.marketing p + h4 {
-	  margin-top: 28px;
-	}
+        /* Customize container */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 730px;
+            }
+        }
 
-	/* Responsive: Portrait tablets and up */
-	@media screen and (min-width: 768px) {
-	  /* Remove the padding we set earlier */
-	  .header,
-	  .marketing,
-	  .footer {
-		padding-left: 0;
-		padding-right: 0;
-	  }
-	  /* Space out the masthead */
-	  .header {
-		margin-bottom: 30px;
-	  }
-	  /* Remove the bottom border on the jumbotron for visual effect */
-	  .jumbotron {
-		border-bottom: 0;
-	  }
-	}
+        .container-narrow > hr {
+            margin: 30px 0;
+        }
 
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6,
-	p,
-	blockquote {
-		margin: 0;
-		padding: 0;
-	}
-	body {
-		font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
-		font-size: 13px;
-		line-height: 18px;
-		color: #737373;
-		background-color: white;
-		margin: 10px 13px 10px 13px;
-	}
-	table {
-		margin: 10px 0 15px 0;
-		border-collapse: collapse;
-	}
-	td,th {	
-		border: 1px solid #ddd;
-		padding: 3px 10px;
-	}
-	th {
-		padding: 5px 10px;	
-	}
+        /* Main marketing message and sign up button */
+        .jumbotron {
+            text-align: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
 
-	a {
-		color: #0069d6;
-	}
-	a:hover {
-		color: #0050a3;
-		text-decoration: none;
-	}
-	a img {
-		border: none;
-	}
-	p {
-		margin-bottom: 9px;
-	}
-	h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		color: #404040;
-		line-height: 36px;
-	}
-	h1 {
-		margin-bottom: 18px;
-		font-size: 30px;
-	}
-	h2 {
-		font-size: 24px;
-	}
-	h3 {
-		font-size: 18px;
-	}
-	h4 {
-		font-size: 16px;
-	}
-	h5 {
-		font-size: 14px;
-	}
-	h6 {
-		font-size: 13px;
-	}
-	hr {
-		margin: 0 0 19px;
-		border: 0;
-		border-bottom: 1px solid #ccc;
-	}
-	blockquote {
-		padding: 13px 13px 21px 15px;
-		margin-bottom: 18px;
-		font-family:georgia,serif;
-		font-style: italic;
-	}
-	blockquote:before {
-		content:"\201C";
-		font-size:40px;
-		margin-left:-10px;
-		font-family:georgia,serif;
-		color:#eee;
-	}
-	blockquote p {
-		font-size: 14px;
-		font-weight: 300;
-		line-height: 18px;
-		margin-bottom: 0;
-		font-style: italic;
-	}
-	code, pre {
-		font-family: Monaco, Andale Mono, Courier New, monospace;
-	}
-	code {
-		background-color: #fee9cc;
-		color: rgba(0, 0, 0, 0.75);
-		padding: 1px 3px;
-		font-size: 12px;
-		-webkit-border-radius: 3px;
-		-moz-border-radius: 3px;
-		border-radius: 3px;
-	}
-	pre {
-		display: block;
-		padding: 14px;
-		margin: 0 0 18px;
-		line-height: 16px;
-		font-size: 11px;
-		border: 1px solid #d9d9d9;
-		white-space: pre-wrap;
-		word-wrap: break-word;
-	}
-	pre code {
-		color:#737373;
-		font-size: 11px;
-		padding: 0;
-	}
-	sup {
-		font-size: 0.83em;
-		vertical-align: super;
-		line-height: 0;
-	}
-	* {
-		-webkit-print-color-adjust: exact;
-	}
-	@media screen and (min-width: 914px) {
-		body {
-			width: 854px;
-			margin:10px auto;
-		}
-	}
-	@media print {
-		body,code,pre code,h1,h2,h3,h4,h5,h6 {
-			color: black;
-		}
-		table, pre {
-			page-break-inside: avoid;
-		}
-	}
+        .jumbotron .btn {
+            font-size: 21px;
+            padding: 14px 24px;
+        }
 
-	img[alt=apikey_instruction] {
-		width: 680px;
-	}
+        /* Supporting marketing content */
+        .marketing {
+            margin: 40px 0;
+        }
 
-	code {
-		background-color: #F5F5F5;
-	}
+        .marketing p + h4 {
+            margin-top: 28px;
+        }
 
-	table {
-		width: 100%;
-	}
+        /* Responsive: Portrait tablets and up */
+        @media screen and (min-width: 768px) {
+            /* Remove the padding we set earlier */
+            .header,
+            .marketing,
+            .footer {
+                padding-left: 0;
+                padding-right: 0;
+            }
 
-    
-    /* Space out content a bit */
-	body {
-	  padding-top: 20px;
-	  padding-bottom: 20px;
-	}
+            /* Space out the masthead */
+            .header {
+                margin-bottom: 30px;
+            }
 
-	/* Everything but the jumbotron gets side spacing for mobile first views */
-	.header,
-	.marketing,
-	.footer {
-	  padding-left: 15px;
-	  padding-right: 15px;
-	}
+            /* Remove the bottom border on the jumbotron for visual effect */
+            .jumbotron {
+                border-bottom: 0;
+            }
+        }
 
-	/* Custom page header */
-	.header {
-	  border-bottom: 1px solid #e5e5e5;
-	}
-	/* Make the masthead heading the same height as the navigation */
-	.header h3 {
-	  margin-top: 0;
-	  margin-bottom: 0;
-	  line-height: 40px;
-	  padding-bottom: 19px;
-	}
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote {
+            margin: 0;
+            padding: 0;
+        }
 
-	/* Custom page footer */
-	.footer {
-	  padding-top: 19px;
-	  color: #777;
-	  border-top: 1px solid #e5e5e5;
-	}
+        body {
+            font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB", Arial, sans-serif;
+            font-size: 13px;
+            line-height: 18px;
+            color: #737373;
+            background-color: white;
+            margin: 10px 13px 10px 13px;
+        }
 
-	/* Customize container */
-	@media (min-width: 768px) {
-	  .container {
-		max-width: 730px;
-	  }
-	}
-	.container-narrow > hr {
-	  margin: 30px 0;
-	}
+        table {
+            margin: 10px 0 15px 0;
+            border-collapse: collapse;
+        }
 
-	/* Main marketing message and sign up button */
-	.jumbotron {
-	  text-align: center;
-	  border-bottom: 1px solid #e5e5e5;
-	}
-	.jumbotron .btn {
-	  font-size: 21px;
-	  padding: 14px 24px;
-	}
+        td, th {
+            border: 1px solid #ddd;
+            padding: 3px 10px;
+        }
 
-	/* Supporting marketing content */
-	.marketing {
-	  margin: 40px 0;
-	}
-	.marketing p + h4 {
-	  margin-top: 28px;
-	}
+        th {
+            padding: 5px 10px;
+        }
 
-	/* Responsive: Portrait tablets and up */
-	@media screen and (min-width: 768px) {
-	  /* Remove the padding we set earlier */
-	  .header,
-	  .marketing,
-	  .footer {
-		padding-left: 0;
-		padding-right: 0;
-	  }
-	  /* Space out the masthead */
-	  .header {
-		margin-bottom: 30px;
-	  }
-	  /* Remove the bottom border on the jumbotron for visual effect */
-	  .jumbotron {
-		border-bottom: 0;
-	  }
-	}
+        a {
+            color: #0069d6;
+        }
+
+        a:hover {
+            color: #0050a3;
+            text-decoration: none;
+        }
+
+        a img {
+            border: none;
+        }
+
+        p {
+            margin-bottom: 9px;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #404040;
+            line-height: 36px;
+        }
+
+        h1 {
+            margin-bottom: 18px;
+            font-size: 30px;
+        }
+
+        h2 {
+            font-size: 24px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+
+        h4 {
+            font-size: 16px;
+        }
+
+        h5 {
+            font-size: 14px;
+        }
+
+        h6 {
+            font-size: 13px;
+        }
+
+        hr {
+            margin: 0 0 19px;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+        }
+
+        blockquote {
+            padding: 13px 13px 21px 15px;
+            margin-bottom: 18px;
+            font-family: georgia, serif;
+            font-style: italic;
+        }
+
+        blockquote:before {
+            content: "\201C";
+            font-size: 40px;
+            margin-left: -10px;
+            font-family: georgia, serif;
+            color: #eee;
+        }
+
+        blockquote p {
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 18px;
+            margin-bottom: 0;
+            font-style: italic;
+        }
+
+        code, pre {
+            font-family: Monaco, Andale Mono, Courier New, monospace;
+        }
+
+        code {
+            background-color: #fee9cc;
+            color: rgba(0, 0, 0, 0.75);
+            padding: 1px 3px;
+            font-size: 12px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+        pre {
+            display: block;
+            padding: 14px;
+            margin: 0 0 18px;
+            line-height: 16px;
+            font-size: 11px;
+            border: 1px solid #d9d9d9;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        pre code {
+            color: #737373;
+            font-size: 11px;
+            padding: 0;
+        }
+
+        sup {
+            font-size: 0.83em;
+            vertical-align: super;
+            line-height: 0;
+        }
+
+        * {
+            -webkit-print-color-adjust: exact;
+        }
+
+        @media screen and (min-width: 914px) {
+            body {
+                width: 854px;
+                margin: 10px auto;
+            }
+        }
+
+        @media print {
+            body, code, pre code, h1, h2, h3, h4, h5, h6 {
+                color: black;
+            }
+
+            table, pre {
+                page-break-inside: avoid;
+            }
+        }
+
+        img[alt=apikey_instruction] {
+            width: 680px;
+        }
+
+        code {
+            background-color: #F5F5F5;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        /* Space out content a bit */
+        body {
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        /* Everything but the jumbotron gets side spacing for mobile first views */
+        .header,
+        .marketing,
+        .footer {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        /* Custom page header */
+        .header {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        /* Make the masthead heading the same height as the navigation */
+        .header h3 {
+            margin-top: 0;
+            margin-bottom: 0;
+            line-height: 40px;
+            padding-bottom: 19px;
+        }
+
+        /* Custom page footer */
+        .footer {
+            padding-top: 19px;
+            color: #777;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        /* Customize container */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 730px;
+            }
+        }
+
+        .container-narrow > hr {
+            margin: 30px 0;
+        }
+
+        /* Main marketing message and sign up button */
+        .jumbotron {
+            text-align: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .jumbotron .btn {
+            font-size: 21px;
+            padding: 14px 24px;
+        }
+
+        /* Supporting marketing content */
+        .marketing {
+            margin: 40px 0;
+        }
+
+        .marketing p + h4 {
+            margin-top: 28px;
+        }
+
+        /* Responsive: Portrait tablets and up */
+        @media screen and (min-width: 768px) {
+            /* Remove the padding we set earlier */
+            .header,
+            .marketing,
+            .footer {
+                padding-left: 0;
+                padding-right: 0;
+            }
+
+            /* Space out the masthead */
+            .header {
+                margin-bottom: 30px;
+            }
+
+            /* Remove the bottom border on the jumbotron for visual effect */
+            .jumbotron {
+                border-bottom: 0;
+            }
+        }
     </style>
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <div class="container">
-      <div class="header">
+<div class="container">
+    <div class="header">
         <h3 class="text-muted">
-			<img src="data:image/gif;base64,R0lGODlhfQAoAPcAACyHw5PA3id2qoaz0WFhYf3+/kmNupS71NTm8cbd7EaVyXumwo+82rbN3YqKis/Pz+71+jyFtcvh8J6+01ZWVmuaubS0tHWt0qHK5bKystra2sPa6djY2J6entHh7Mzi8TV5psDW5erq6luhz+Lu9dbW1urx9dTU1EmYzG6r08LCwnl5eWtra22my53H4rrS4kZGRil4rFGVwwNShvD2+ujo6HFxcUqGrbrX6RRjl9nn8SBpmnmjvwdWirHN4MbGxl6TtqHH3+Dr876+vpiYmBZro06Xxy99smRkZEKNvhxrnm9vb5bE4nZ2dsTExLq6uoODg63P5l5eXs/k8Uyazzs7O0pKSgVfm05OThx2sj4+PlJSUlpaWkJCQiB6tkSTxwlYjQtajpOTkzuKvhNuqqysrBJhldLS0sXc6z2MwaSkpPPz89PT0+bm5ghini6Cu6qqqgtmohdyrmdnZ6ampg9qpg1ckefn5yR+uvT09NHR0UKRxaioqDmIvN/r8iRzpxdmmvX19Sx7r4CAgECPw6CgoKKiotDQ0Im21BBfk5ubm3R0dPb29hlonfn7/I6OjiiCvs3NzZGRkYCty66ursHY53SnyWxsbDaFuVibyCFwpJG+3KLE2luey8ng7+Xx+IOwzh5tojGLx4262DSDt7a2tpjF45XC4IKvzcjf7qrL4jKGvnOlxzGAtM/g7MTb6j+Ow12bxZq/2K/R6SFtoDyLvzF+sb7S4E6Sv36ow6rP6FWYxX6w0VWezZ/I5IO32E2c0Cl2qeDg4EiKtafD1YW42abI33CfvvP3+ZC30rnP3vr8/Z3F39fo89/f37zR3yhwn5W2zODs8+Pu9oKrxt7o74mux0iQv4u+34u41o693DiHvDyArbrV58DX5r/b7TuIu+zs7D+Jug1ajff6/WegxWyhxJaWlmyfwXSoyqXE2KjH3IaGhlGSvczc6MfZ5mam0Gmm0BlikkuYy5LB4IWuybCwsEuUxU6TwNzo8Dd/r9Pk8PD1+R5zrJnB3P///yH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjEgNjQuMTQwOTQ5LCAyMDEwLzEyLzA3LTEwOjU3OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOkY4N0YxMTc0MDcyMDY4MTE4QTZEQ0Y2OUNBQTU0NTZCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjEwNTk5NUU5MzNFQTExRTM5RTlGRUMxOUMzRTg5Q0RGIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjEwNTk5NUU4MzNFQTExRTM5RTlGRUMxOUMzRTg5Q0RGIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUuMSBNYWNpbnRvc2giPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NDc0MjI2QjExMjA2ODExOEE2RENGNjlDQUE1NDU2QiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGODdGMTE3NDA3MjA2ODExOEE2RENGNjlDQUE1NDU2QiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAAAAAAALAAAAAB9ACgAAAj/AP8JHEiwoMGDCBMqXMiwocOHECNKnEixokWJNIBhuMixo0eJEApOobLxo8mTJ8kxoaKL4CySKGPKrEgPhc1vA7Gh8DWzp0+GqRQInSdhCoYRClz8XMp0YIFeQqNGVdq0qs9TX7JqzUrVqleONAo4LbanbFl42qI0+8rWYgojmxAU+EWoLiFtJNrqrYgjjd809/4ambK38ER/YxIrHiNjmsFPHwpCRhluiIUfjPYy0pD5YZA+oEEnWWvQlKjIA02j9ghnjus5Nn7o1TDHQsRu4DDpDoLQFAAJBH0D95gByYofHDIsgaKXA5IMEnmRIoVvGcJTvwliHz4RQAqClwiI/xgoItBFDgSeUERvT+K1Vq38JQwAyRNB+vYpQhoxkIMUdif5R8l6UgwIkTdHJKhDQpvgkQpBDT4o0DQXrIKHEVEQhAMseMCCwz84dILHKp3E808JXJSRUCBlLMHFEmWYN5Awj3DBBREylrHCi1Co+I8IREDxyEAq7IgEEeMJhKKPC22QTjuCRCmILWIhxIAXFzCgJQOZeJGAQAi84UUtXWI54RtvZILmP8x44aYXb5xIARwI5dEEBQQMQgAFTeQhkAh7DnInC346QMGhFDjwTx574inQOYcOwgKezig5Z0OyxKDpphEoNEoWoIYK6pf/bJOFKgLRcM2p/ySQxSj/TP+DwEBZ7DLQCVvwgZAYW4gxEK++/sOrbcJuQSyuugpkwRaKCjTEFov4+c+zcwiELKYCZKttpwllI4c/aISLRgtyoPEPGnK0QBAJcsjwzz5yJGEuQe0OxAYWdCCEBRIFIYGFQCv8K9C9+f5D8EB0YMHGQAEnKZAkChuMb0PemDPMHxj/EUyVByFCxisEeQyyx8YUJA4ZArVABhmx0DAQGbgMdIYVahw085AEEWHFGf80YYXMNAs0c80CqbHzQFYQUNAPQQ8d0QuaRL0gQgPUsQFBVV9tTB0DFNTPEQNtEEEd3P5ThwED6QHDIgfVsHZBg8BQwz+LwJA2DIYIpHbeAhn/AoMeA0lhN0GUwKDe3hLpE0ooByQ0QBxXD/T41dLEEQM/Ax0QRzkFGRCHBwLFgfZAWGCxxkB3OCEQF11oMJAGXXAhkA1dDHRIF4UIdHvuAhXSxSEDOdAFk2uwfsc/u0uEjhJKcMNxQaC4UQlB0U//jyVu6MNJJdgXIcQ/HgjAiQ8CuPH9P+Vb0vg/HWhBQCkPdGCFFseroIUVcDwAx/wqCLSEFgN5gBY6IJA73K8D/WvfA1A3PzE8oBQE0EKwBEgAOj3kBbRohAbXZxBUXMEbBPEgCAXCiiuY8Ap/AN0/fHDCK7BiID4oggkHIokq2LAKMCDWPywAgxvmcCCXqEIA/6tAQIF0wIaXYF8VFvg6CtywCpIgCAFs+BB1NAIQWASEEvJxED+EoCBeBGMyJuEDME5iEq4oCD9CkMaBtIEPirDA6QiyBgvEcY4CaYPrBhKJNhCkDX38xxoicRAVKIIPfiyIBvbIkHrk4JGQzAEIzmeYSjpkHWbIpBl2oEloqNCSoFTIDXZwjHc4AgiJSGUOFmCCULrSICZwxEBOaYda1vIG1JiAO17JS4IsIAzADCYwc9HLXhZgB2BIpjKTScxivlIZPYjmOBrwjAXIowcLcOYrKxDNHhBjINzMpjZDiYwKzMAaBInGDHgwzldWoyC3WGc7tWkCec7znvjMpz47EgEQADs=">
-			WHMCS Module
-		</h3>
-      </div>
-
-      <div class="row marketing">
-		<p><a name="top"></a></p>
-<h1>Hostcontrol WHMCS Module</h1>
-<h2>Table of contents</h2>
-<ul>
-<li><a href="#ii">Installation instructions</a></li>
-<li><a href="#cl">Changelog</a></li>
-<li><a href="#faq">Frequently Asked Questions</a></li>
-<li><a href="#ki">Known issues</a></li>
-</ul>
-<hr>
-<h2><a name="ii"></a>Installation instructions</h2>
-<ol>
-<li>Unzip directory <code>hostcontrol</code></li>
-<li>Upload directory <code>hostcontrol</code> to <code>/modules/registrars/</code> on the WHMCS server</li>
-<li>Access your WHMCS Admin Area</li>
-<li>Use the navigation menu to go to “Setup -&gt; Domain Registrars”</li>
-<li>WHMCS detected the HostControl registrar module</li>
-<li>Click the Activate button</li>
-<li>Insert your API key and click Save</li>
-</ol>
-<p><a href="#top">Back to top</a></p>
-<hr>
-<h2><a name="cl"></a> Changelog</h2>
-<p><strong>February 18, 2014</strong></p>
-<ul>
-<li>Added new module configuration option: "Use Alternative Connect Port"<br />
-    &nbsp;&nbsp;&nbsp; This will cause the module to connect to port 14739 and 
-						may resolve 'no response received' messages.<br />
-	&nbsp;&nbsp;&nbsp; <i>If your server is in Iran, please use this setting!</i></li>
-<li>Added version detection. This allows you to quickly see if your module version is
-	up-to-date. Go to “Setup -&gt; Domain Registrars” to see if you are using the latest version.</li>
-</ul>
-<p><strong>December 9, 2013</strong></p>
-<ul>
-<li>Domains are now always treated as lowercase, preventing matching errors</li>
-</ul>
-<p><strong>November 29, 2013</strong></p>
-<ul>
-<li>Emailaddresses are now always treated as lowercase</li>
-<li>Edited module descriptions and texts</li>
-<li>Added certificate for cURL to confirm Hostcontrol SSL certificate</li>
-</ul>
-<p><strong>November 18, 2013</strong></p>
-<ul>
-<li>Fixed address line import</li>
-<li>Modified include paths, which triggered errors on some PHP configurations. 
-    The <code>getvalidlanguages()</code> redeclare error is now resolved</li>
-</ul>
-<p>November 15, 2013</p>
-<ul>
-<li>Fixed registration IP issue</li>
-<li>When registering a new domain, your default nameservers will be used 
-    instead of the Hostcontrol nameservers</li>
-<li>
-<ul>
-<li><strong>PLEASE NOTE</strong>: <em>This does currently NOT work with transfer, because they 
-    are treated differently in the Hostcontrol Backoffice. Default nameservers 
-    on transfer will be added later.</em></li>
-</ul>
-</li>
-</ul>
-<p><strong>November 13, 2013</strong></p>
-<ul>
-<li>cURL tweaking to prevent <code>No response received</code></li>
-</ul>
-<p><strong>November 12, 2013</strong></p>
-<ul>
-<li>Eliminated ‘no admin user found’ error</li>
-<li>Throws a user-friendly error when an emailaddress could not be found</li>
-<li>Added more FAQs and a Known issues in this readme</li>
-<li>Updated API URL</li>
-</ul>
-<p><strong>November 9, 2013</strong></p>
-<ul>
-<li>Added more debug functionality</li>
-</ul>
-<p><strong>November 1, 2013</strong></p>
-<ul>
-<li>Looks up existing/imported customers based on emailaddress</li>
-</ul>
-<p><strong>Late October, 2013</strong></p>
-<ul>
-<li>Support for</li>
-<li>
-<ul>
-<li>customer creation</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>domain registrations</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>domain transfers</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>epp-code</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>dns change</li>
-</ul>
-</li>
-<li>
-<ul>
-<li>name server change</li>
-</ul>
-</li>
-</ul>
-<p><a href="#top">Back to top</a></p>
-<hr>
-<h2><a name="faq"></a> Frequently Asked Questions</h2>
-<h4>Wat does the <code>unknown label</code> error mean?</h4>
-<p>This means that you don’t have the correct API key inserted in the registrar module configuration.</p>
-<h4>Where do I find the API key in the HostControl backoffce?</h4>
-<p>Login to your Reseller Area. From the navigation menu, mouse-over “Dashboard” and select "Label". This will take you to the Label Overview page. Your API Key is located at the bottom of this Label Overview page.</p>
-<h4>Why do I get the message <code>State: Select a valid choice. That choice is not one of the available choices.</code>?</h4>
-<p>The HostControl backend has a strict validation of countries, states and cities. Please check your clients profile and make sure the country has been set correctly and that the statename and cityname are spelled correctly. Please double-check for typing errors.</p>
-<h4>Do I have to link customers from WHMCS to HostControl?</h4>
-<p>No. If you register a new domain for an already existing WHMCS-customer, the HostControl API will see if your HostControl account already contains a customer with the same e-mailaddress. If so, your new domain will be linked to that customer. If not, a new customer will be created in HostControl Backoffice.</p>
-<h4>My orders aren’t being processed by HostControl Backoffice, what is happening?</h4>
-<p>If you enabled invoicing for your Storefront, HostControl Backoffice will not deliver an order before the invoice has been paid for. We recommend that you disable invoicing for your Storefront. You can do this by logging in to your Reseller Area, then go to Storefront. At the navigation menu hover Setttings, and choose General from the dropdown. On the next page click the Invoicing tab and uncheck the checkbox for “Is invoicing enabled”. If this does not solve the issue please contact us.</p>
-<h4>No new customer account could be created, what can I do?</h4>
-<p>Please ensure that you have setup ‘accepted countries’. You can do this by logging in to your Reseller Area, then go to Storefront. At the navigation menu hover Setttings, and choose General from the dropdown. On the next page click the Customers tab. Please enable all countries you want customer to be registering from. This also applies to the Country0-setting from your WHMCS installation. If this does not solve the issue please contact us.</p>
-<h4>My question is not listed, can I contact you guys?</h4>
-<p>Ofcourse you can. But it might be useful to check some settings in the Reseller Area first. For example, if you have problems registering domains, please check the TLD plans in your Storefront configuration. Also check if you have setup pricing for your products.</p>
-<p>If you have any other questions, please contact us from your Reseller Area.</p>
-<p><a href="#top">Back to top</a></p>
-<hr>
-<h2><a name="ki"></a> Known issues</h2>
-<h4>Auth-codes on domains which are waiting for auth-code</h4>
-<p>Auth-codes can only be resupplied by admins. We have tried to build this into the WHMCS-clientarea. 
-Currently, WHMCS only lets us create WHMCS-clientarea addons for ACTIVE domains. 
-So pending-transfer/waiting for auth-code transfer can not be modified by the client until the transfer 
-is completed. The current solution is that the WHMCS admin, when receiving the (correct) auth-code,
-supplies the correct </p>
-<p>The default nameservers you have set in the General Domain settings in WHMCS Administration panel are currently only set on newly registered domains. They will only be updated if the nameservers are:
- - not childnameservers
- - reachable on IP basis</p>
-<p>Please refer to the Module log if nameservers have not been set, and supply the module log when opening a Support Ticket at Hostcontrol</p>
-<p><a href="#top">Back to top</a></p>
-      </div>
-
-      <div class="footer">
-        <p>&nbsp;</p>
-      </div>
-
+            <img
+                src="data:image/gif;base64,R0lGODlhfQAoAPcAACyHw5PA3id2qoaz0WFhYf3+/kmNupS71NTm8cbd7EaVyXumwo+82rbN3YqKis/Pz+71+jyFtcvh8J6+01ZWVmuaubS0tHWt0qHK5bKystra2sPa6djY2J6entHh7Mzi8TV5psDW5erq6luhz+Lu9dbW1urx9dTU1EmYzG6r08LCwnl5eWtra22my53H4rrS4kZGRil4rFGVwwNShvD2+ujo6HFxcUqGrbrX6RRjl9nn8SBpmnmjvwdWirHN4MbGxl6TtqHH3+Dr876+vpiYmBZro06Xxy99smRkZEKNvhxrnm9vb5bE4nZ2dsTExLq6uoODg63P5l5eXs/k8Uyazzs7O0pKSgVfm05OThx2sj4+PlJSUlpaWkJCQiB6tkSTxwlYjQtajpOTkzuKvhNuqqysrBJhldLS0sXc6z2MwaSkpPPz89PT0+bm5ghini6Cu6qqqgtmohdyrmdnZ6ampg9qpg1ckefn5yR+uvT09NHR0UKRxaioqDmIvN/r8iRzpxdmmvX19Sx7r4CAgECPw6CgoKKiotDQ0Im21BBfk5ubm3R0dPb29hlonfn7/I6OjiiCvs3NzZGRkYCty66ursHY53SnyWxsbDaFuVibyCFwpJG+3KLE2luey8ng7+Xx+IOwzh5tojGLx4262DSDt7a2tpjF45XC4IKvzcjf7qrL4jKGvnOlxzGAtM/g7MTb6j+Ow12bxZq/2K/R6SFtoDyLvzF+sb7S4E6Sv36ow6rP6FWYxX6w0VWezZ/I5IO32E2c0Cl2qeDg4EiKtafD1YW42abI33CfvvP3+ZC30rnP3vr8/Z3F39fo89/f37zR3yhwn5W2zODs8+Pu9oKrxt7o74mux0iQv4u+34u41o693DiHvDyArbrV58DX5r/b7TuIu+zs7D+Jug1ajff6/WegxWyhxJaWlmyfwXSoyqXE2KjH3IaGhlGSvczc6MfZ5mam0Gmm0BlikkuYy5LB4IWuybCwsEuUxU6TwNzo8Dd/r9Pk8PD1+R5zrJnB3P///yH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjEgNjQuMTQwOTQ5LCAyMDEwLzEyLzA3LTEwOjU3OjAxICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06T3JpZ2luYWxEb2N1bWVudElEPSJ4bXAuZGlkOkY4N0YxMTc0MDcyMDY4MTE4QTZEQ0Y2OUNBQTU0NTZCIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjEwNTk5NUU5MzNFQTExRTM5RTlGRUMxOUMzRTg5Q0RGIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjEwNTk5NUU4MzNFQTExRTM5RTlGRUMxOUMzRTg5Q0RGIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUuMSBNYWNpbnRvc2giPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo1NDc0MjI2QjExMjA2ODExOEE2RENGNjlDQUE1NDU2QiIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGODdGMTE3NDA3MjA2ODExOEE2RENGNjlDQUE1NDU2QiIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS0dDPzs3My8rJyMfGxcTDwsHAv769vLu6ubi3trW0s7KxsK+urayrqqmop6alpKOioaCfnp2cm5qZmJeWlZSTkpGQj46NjIuKiYiHhoWEg4KBgH9+fXx7enl4d3Z1dHNycXBvbm1sa2ppaGdmZWRjYmFgX15dXFtaWVhXVlVUU1JRUE9OTUxLSklIR0ZFRENCQUA/Pj08Ozo5ODc2NTQzMjEwLy4tLCsqKSgnJiUkIyIhIB8eHRwbGhkYFxYVFBMSERAPDg0MCwoJCAcGBQQDAgEAACH5BAAAAAAALAAAAAB9ACgAAAj/AP8JHEiwoMGDCBMqXMiwocOHECNKnEixokWJNIBhuMixo0eJEApOobLxo8mTJ8kxoaKL4CySKGPKrEgPhc1vA7Gh8DWzp0+GqRQInSdhCoYRClz8XMp0YIFeQqNGVdq0qs9TX7JqzUrVqleONAo4LbanbFl42qI0+8rWYgojmxAU+EWoLiFtJNrqrYgjjd809/4ambK38ER/YxIrHiNjmsFPHwpCRhluiIUfjPYy0pD5YZA+oEEnWWvQlKjIA02j9ghnjus5Nn7o1TDHQsRu4DDpDoLQFAAJBH0D95gByYofHDIsgaKXA5IMEnmRIoVvGcJTvwliHz4RQAqClwiI/xgoItBFDgSeUERvT+K1Vq38JQwAyRNB+vYpQhoxkIMUdif5R8l6UgwIkTdHJKhDQpvgkQpBDT4o0DQXrIKHEVEQhAMseMCCwz84dILHKp3E808JXJSRUCBlLMHFEmWYN5Awj3DBBREylrHCi1Co+I8IREDxyEAq7IgEEeMJhKKPC22QTjuCRCmILWIhxIAXFzCgJQOZeJGAQAi84UUtXWI54RtvZILmP8x44aYXb5xIARwI5dEEBQQMQgAFTeQhkAh7DnInC346QMGhFDjwTx574inQOYcOwgKezig5Z0OyxKDpphEoNEoWoIYK6pf/bJOFKgLRcM2p/ySQxSj/TP+DwEBZ7DLQCVvwgZAYW4gxEK++/sOrbcJuQSyuugpkwRaKCjTEFov4+c+zcwiELKYCZKttpwllI4c/aISLRgtyoPEPGnK0QBAJcsjwzz5yJGEuQe0OxAYWdCCEBRIFIYGFQCv8K9C9+f5D8EB0YMHGQAEnKZAkChuMb0PemDPMHxj/EUyVByFCxisEeQyyx8YUJA4ZArVABhmx0DAQGbgMdIYVahw085AEEWHFGf80YYXMNAs0c80CqbHzQFYQUNAPQQ8d0QuaRL0gQgPUsQFBVV9tTB0DFNTPEQNtEEEd3P5ThwED6QHDIgfVsHZBg8BQwz+LwJA2DIYIpHbeAhn/AoMeA0lhN0GUwKDe3hLpE0ooByQ0QBxXD/T41dLEEQM/Ax0QRzkFGRCHBwLFgfZAWGCxxkB3OCEQF11oMJAGXXAhkA1dDHRIF4UIdHvuAhXSxSEDOdAFk2uwfsc/u0uEjhJKcMNxQaC4UQlB0U//jyVu6MNJJdgXIcQ/HgjAiQ8CuPH9P+Vb0vg/HWhBQCkPdGCFFseroIUVcDwAx/wqCLSEFgN5gBY6IJA73K8D/WvfA1A3PzE8oBQE0EKwBEgAOj3kBbRohAbXZxBUXMEbBPEgCAXCiiuY8Ap/AN0/fHDCK7BiID4oggkHIokq2LAKMCDWPywAgxvmcCCXqEIA/6tAQIF0wIaXYF8VFvg6CtywCpIgCAFs+BB1NAIQWASEEvJxED+EoCBeBGMyJuEDME5iEq4oCD9CkMaBtIEPirDA6QiyBgvEcY4CaYPrBhKJNhCkDX38xxoicRAVKIIPfiyIBvbIkHrk4JGQzAEIzmeYSjpkHWbIpBl2oEloqNCSoFTIDXZwjHc4AgiJSGUOFmCCULrSICZwxEBOaYda1vIG1JiAO17JS4IsIAzADCYwc9HLXhZgB2BIpjKTScxivlIZPYjmOBrwjAXIowcLcOYrKxDNHhBjINzMpjZDiYwKzMAaBInGDHgwzldWoyC3WGc7tWkCec7znvjMpz47EgEQADs=">
+            WHMCS Module
+        </h3>
     </div>
-  </body>
+
+    <div class="row marketing">
+        <p><a name="top"></a></p>
+
+        <h1>Hostcontrol WHMCS Module</h1>
+
+        <h2>Table of contents</h2>
+        <ul>
+            <li><a href="#ii">Installation instructions</a></li>
+            <li><a href="#cl">Changelog</a></li>
+            <li><a href="#faq">Frequently Asked Questions</a></li>
+            <li><a href="#ki">Known issues</a></li>
+        </ul>
+        <hr>
+        <h2><a name="ii"></a>Installation instructions</h2>
+        <ol>
+            <li>Unzip directory <code>hostcontrol</code></li>
+            <li>Upload directory <code>hostcontrol</code> to <code>/modules/registrars/</code> on the WHMCS server</li>
+            <li>Access your WHMCS Admin Area</li>
+            <li>Use the navigation menu to go to “Setup &rarr; Products/Services &rarr; Domain Registrars”</li>
+            <li>WHMCS detected the HostControl registrar module</li>
+            <li>Click the Activate button</li>
+            <li>Insert your API key and click Save</li>
+        </ol>
+        <p><a href="#top">Back to top</a></p>
+        <hr>
+        <h2><a name="cl"></a> Changelog</h2>
+
+        <p><strong>May 13, 2014</strong></p>
+        <ul>
+            <li>Added the option to enable and disable the domain transfer lock</li>
+            <li>Improved handling of errors</li>
+        </ul>
+        <p><strong>February 18, 2014</strong></p>
+        <ul>
+            <li>Added new module configuration option: "Use Alternative Connect Port"<br/>
+                &nbsp;&nbsp;&nbsp; This will cause the module to connect to port 14739 and
+                may resolve 'no response received' messages.<br/>
+                &nbsp;&nbsp;&nbsp; <i>If your server is in Iran, please use this setting!</i></li>
+            <li>Added version detection. This allows you to quickly see if your module version is
+                up-to-date. Go to “Setup -&gt; Products/Services &rarr; Domain Registrars” to see if you are using the latest version.
+            </li>
+        </ul>
+        <p><strong>December 9, 2013</strong></p>
+        <ul>
+            <li>Domains are now always treated as lowercase, preventing matching errors</li>
+        </ul>
+        <p><strong>November 29, 2013</strong></p>
+        <ul>
+            <li>Emailaddresses are now always treated as lowercase</li>
+            <li>Edited module descriptions and texts</li>
+            <li>Added certificate for cURL to confirm Hostcontrol SSL certificate</li>
+        </ul>
+        <p><strong>November 18, 2013</strong></p>
+        <ul>
+            <li>Fixed address line import</li>
+            <li>Modified include paths, which triggered errors on some PHP configurations.
+                The <code>getvalidlanguages()</code> redeclare error is now resolved
+            </li>
+        </ul>
+        <p>November 15, 2013</p>
+        <ul>
+            <li>Fixed registration IP issue</li>
+            <li>When registering a new domain, your default nameservers will be used
+                instead of the Hostcontrol nameservers
+            </li>
+            <li>
+                <ul>
+                    <li><strong>PLEASE NOTE</strong>: <em>This does currently NOT work with transfer, because they
+                            are treated differently in the Hostcontrol Backoffice. Default nameservers
+                            on transfer will be added later.</em></li>
+                </ul>
+            </li>
+        </ul>
+        <p><strong>November 13, 2013</strong></p>
+        <ul>
+            <li>cURL tweaking to prevent <code>No response received</code></li>
+        </ul>
+        <p><strong>November 12, 2013</strong></p>
+        <ul>
+            <li>Eliminated ‘no admin user found’ error</li>
+            <li>Throws a user-friendly error when an emailaddress could not be found</li>
+            <li>Added more FAQs and a Known issues in this readme</li>
+            <li>Updated API URL</li>
+        </ul>
+        <p><strong>November 9, 2013</strong></p>
+        <ul>
+            <li>Added more debug functionality</li>
+        </ul>
+        <p><strong>November 1, 2013</strong></p>
+        <ul>
+            <li>Looks up existing/imported customers based on emailaddress</li>
+        </ul>
+        <p><strong>Late October, 2013</strong></p>
+        <ul>
+            <li>Support for</li>
+            <li>
+                <ul>
+                    <li>customer creation</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>domain registrations</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>domain transfers</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>epp-code</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>dns change</li>
+                </ul>
+            </li>
+            <li>
+                <ul>
+                    <li>name server change</li>
+                </ul>
+            </li>
+        </ul>
+        <p><a href="#top">Back to top</a></p>
+        <hr>
+        <h2><a name="faq"></a> Frequently Asked Questions</h2>
+        <h4>Wat does the <code>unknown label</code> error mean?</h4>
+
+        <p>This means that you don’t have the correct API key inserted in the registrar module configuration.</p>
+        <h4>Where do I find the API key in the HostControl backoffce?</h4>
+
+        <p>Login to your Reseller Area. From the navigation menu, mouse-over “Dashboard” and select "Label". This will
+            take you to the Label Overview page. Your API Key is located at the bottom of this Label Overview page.</p>
+        <h4>Why do I get the message <code>State: Select a valid choice. That choice is not one of the available
+                choices.</code>?</h4>
+
+        <p>The HostControl backend has a strict validation of countries, states and cities. Please check your clients
+            profile and make sure the country has been set correctly and that the statename and cityname are spelled
+            correctly. Please double-check for typing errors.</p>
+        <h4>Do I have to link customers from WHMCS to HostControl?</h4>
+
+        <p>No. If you register a new domain for an already existing WHMCS-customer, the HostControl API will see if your
+            HostControl account already contains a customer with the same e-mailaddress. If so, your new domain will be
+            linked to that customer. If not, a new customer will be created in HostControl Backoffice.</p>
+        <h4>My orders aren’t being processed by HostControl Backoffice, what is happening?</h4>
+
+        <p>If you enabled invoicing for your Storefront, HostControl Backoffice will not deliver an order before the
+            invoice has been paid for. We recommend that you disable invoicing for your Storefront. You can do this by
+            logging in to your Reseller Area, then go to Storefront. At the navigation menu hover Setttings, and choose
+            General from the dropdown. On the next page click the Invoicing tab and uncheck the checkbox for “Is
+            invoicing enabled”. If this does not solve the issue please contact us.</p>
+        <h4>No new customer account could be created, what can I do?</h4>
+
+        <p>Please ensure that you have setup ‘accepted countries’. You can do this by logging in to your Reseller Area,
+            then go to Storefront. At the navigation menu hover Setttings, and choose General from the dropdown. On the
+            next page click the Customers tab. Please enable all countries you want customer to be registering from.
+            This also applies to the Country0-setting from your WHMCS installation. If this does not solve the issue
+            please contact us.</p>
+        <h4>My question is not listed, can I contact you guys?</h4>
+
+        <p>Ofcourse you can. But it might be useful to check some settings in the Reseller Area first. For example, if
+            you have problems registering domains, please check the TLD plans in your Storefront configuration. Also
+            check if you have setup pricing for your products.</p>
+
+        <p>If you have any other questions, please contact us from your Reseller Area.</p>
+
+        <p><a href="#top">Back to top</a></p>
+        <hr>
+        <h2><a name="ki"></a> Known issues</h2>
+        <h4>Auth-codes on domains which are waiting for auth-code</h4>
+
+        <p>Auth-codes can only be resupplied by admins. We have tried to build this into the WHMCS-clientarea.
+            Currently, WHMCS only lets us create WHMCS-clientarea addons for ACTIVE domains.
+            So pending-transfer/waiting for auth-code transfer can not be modified by the client until the transfer
+            is completed. The current solution is that the WHMCS admin, when receiving the (correct) auth-code,
+            supplies the correct </p>
+
+        <p>The default nameservers you have set in the General Domain settings in WHMCS Administration panel are
+            currently only set on newly registered domains. They will only be updated if the nameservers are:
+            - not childnameservers
+            - reachable on IP basis</p>
+
+        <p>Please refer to the Module log if nameservers have not been set, and supply the module log when opening a
+            Support Ticket at Hostcontrol</p>
+
+        <p><a href="#top">Back to top</a></p>
+    </div>
+
+    <div class="footer">
+        <p>&nbsp;</p>
+    </div>
+
+</div>
+</body>
 </html>

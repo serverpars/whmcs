@@ -4,7 +4,7 @@ class HostControlHelperError extends Exception {}
 
 class HostControlHelper
 {
-    const HOSTCONTROL_TEST_API_URL = "http://backoffice.test02.hostcontrol.com/api/v1";
+    const HOSTCONTROL_TEST_API_URL = "https://resello.bo.hostcontrol-ote.com/api/v1";
     const HOSTCONTROL_PRODUCTION_API_URL = "https://backoffice.hostcontrol.com/api/v1";
     const HOSTCONTROL_PRODUCTION_ALTERNATIVE_API_URL = "https://backoffice.hostcontrol.com:14739/api/v1";
 
@@ -14,6 +14,7 @@ class HostControlHelper
 
     public static $production = true;
     public static $ignored_dns_types = array("NS", "SOA", "URL", "FRAME", "MXE");
+    public static $tld_with_lock_support = array("com", "net", "org", "info", "biz", "name", "cc", "me", "tv", "us");
 
     public static $status_info = array(
         'wait_for_approval'  => 'Waiting for your approval',
@@ -250,6 +251,10 @@ class HostControlHelper
         'UZ' => '998',
     );
 
+    public static $error_codes = array(
+        'domain_missing_child_host' => 'A child host is missing for (one of) given name server.',
+    );
+
     /**
      * getApiUrl
      * Get the HostControl API URL based on the testing-mode of $params
@@ -258,12 +263,12 @@ class HostControlHelper
      */
     public static function getApiUrl($params = array())
     {
-		if (! empty($params['AlternativePort']) && $params['AlternativePort'] == "on")
+        if (! empty($params['AlternativePort']) && $params['AlternativePort'] == "on")
         {
             return self::HOSTCONTROL_PRODUCTION_ALTERNATIVE_API_URL;
         }
-        
-        if ($_SERVER['REMOTE_ADDR'] == "212.203.0.138")
+
+        if (in_array($_SERVER['REMOTE_ADDR'], array("212.203.0.138", "192.168.0.185")))
         {
             self::$production = false;
             return self::HOSTCONTROL_TEST_API_URL;
@@ -373,12 +378,12 @@ class HostControlHelper
         {
             $address .= " " . $params["address2"];
         }
-        
+
         $ip_address = (empty($_SERVER['HTTP_X_FORWARDED_FOR']))?$_SERVER['SERVER_ADDR']:$_SERVER['HTTP_X_FORWARDED_FOR'];
         if(empty($ip_address))
         {
-			$ip_address = '123.234.123.234';
-		}
+            $ip_address = '123.234.123.234';
+        }
 
         $customer_info = array(
             'name'              => $params["firstname"] . ' ' .$params["lastname"],
@@ -430,13 +435,13 @@ class HostControlHelper
 
         try
         {
-			$whmcs_client_email = strtolower(self::get_whmcs_client_email_address($params['userid']));
-            
+            $whmcs_client_email = strtolower(self::get_whmcs_client_email_address($params['userid']));
+
             if(empty($whmcs_client_email))
             {
-				logModuleCall('HostControl', 'lookup-customer-error', 'No customer emailaddress found for WHMCS customer ' . $params['userid'], $params['userid']);
-				throw new HostControlHelperError('No customer emailaddress found for WHMCS client ' . $params['userid'] . '. Please insert an emailaddress for this client.');
-			}
+                logModuleCall('HostControl', 'lookup-customer-error', 'No customer emailaddress found for WHMCS customer ' . $params['userid'], $params['userid']);
+                throw new HostControlHelperError('No customer emailaddress found for WHMCS client ' . $params['userid'] . '. Please insert an emailaddress for this client.');
+            }
 
             $hostcontrol_customer = array_shift($api_client->customer->lookup($whmcs_client_email));
 
@@ -464,6 +469,16 @@ class HostControlHelper
     }
 
     /**
+     * Checks whether a given TLD's has RegistrarLock support
+     * @param $tld
+     * @return bool
+     */
+    public static function tld_has_lock_support($tld)
+    {
+        return array_key_exists($tld, self::$tld_with_lock_support);
+    }
+
+    /**
      * @param $status
      * @return bool
      */
@@ -475,6 +490,21 @@ class HostControlHelper
         }
 
         return self::$status_info[$status];
+    }
+
+    /**
+     *
+     * @param $code
+     * @return string
+     */
+    public static function get_human_friendly_error($code)
+    {
+        if(! array_key_exists($code, self::$error_codes))
+        {
+            return ucfirst(str_replace('_', ' ', $code));
+        }
+
+        return self::$error_codes[$code];
     }
 
     /**
@@ -505,7 +535,7 @@ class HostControlHelper
         $row = mysql_fetch_row($transfer_res);
         return intval($row[0]);
     }
-    
+
     /**
      * Get an e-mailaddress for a WHMCS user
      * @param $user_id

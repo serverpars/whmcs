@@ -8,6 +8,7 @@ class Domain extends ResourceWrapper
         'transfer' => '/domain-transfer',
         'transferstatus' => '/domain-transfer/%d',
         'single' => '/domain/%s',
+        'single-extended' => '/domain/%s?extended=1',
         'renew' => '/domain/%s/renew',
         'nameserver' => '/domain/%s/name-server',
         'auth_code' => '/domain/%s/auth-code',
@@ -101,8 +102,14 @@ class Domain extends ResourceWrapper
 
     public function get($name)
     {
-        $path = $this->get_request_path('single', array($name));
+        $path = $this->get_request_path('single-extended', array($name));
         return $this->apiclient->get($path);
+    }
+
+    public function update($name, $options)
+    {
+        $path = $this->get_request_path('single', array($name));
+        return $this->apiclient->put($path, $options);
     }
 
     public function delete($name)

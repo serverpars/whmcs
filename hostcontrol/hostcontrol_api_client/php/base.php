@@ -98,7 +98,7 @@ class HostControlAPIClient
         curl_setopt($handler, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($handler, CURLOPT_FRESH_CONNECT, true);
         curl_setopt($handler, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($handler, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($handler, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($handler, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($handler, CURLOPT_HTTPHEADER, array("X-APIKEY: $this->apikey"));
 
@@ -135,9 +135,13 @@ class HostControlAPIClient
                 }
                 $error = join(", ", $messages);
             }
-            else
+            else if(! empty($response->error->message) )
             {
                 $error = $response->error->message;
+            }
+            else
+            {
+                $error = HostControlHelper::get_human_friendly_error($response->error->code);
             }
 
             throw new HostControlAPIClientError($error);
