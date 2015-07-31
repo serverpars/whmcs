@@ -8,17 +8,28 @@
 1. Unzip directory hostcontrol
 2. Upload directory hostcontrol to /modules/registrars/ on the WHMCS server
 3. Access your WHMCS Admin Area
-4. Use the navigation menu to go to “Setup -> Domain Registrars”
+4. Use the navigation menu to go to “Setup -> Products/Services -> Domain Registrars”
 5. WHMCS detected the HostControl registrar module
 6. Click the Activate button
 7. Insert your API key and click Save
 
 ### Changelog
+###### July 30, 2015
+ - Tested v6.0 compatibility
+ - Created check to determine if tld has locking-support
+ - Made version check and update messages less obtrusive
+ - Improved version check
+ - Changed some locations/pointers for v6.0
+
+###### May 13, 2014
+ - Added the option to enable and disable a domain lock
+ - Improved handling of errors
+
 ###### February 18, 2014
 - Added new module configuration option: "Use Alternative Connect Port"
 -- This will cause the module to connect to port 14739 and may resolve 'no response received' messages.
 -- If your server is in Iran, please use this setting!
-- Added version detection. This allows you to quickly see if your module version is up-to-date. Go to “Setup -> Domain Registrars” to see if you are using the latest version.
+- Added version detection. This allows you to quickly see if your module version is up-to-date. Go to “Setup -> Products/Services -> Domain Registrars” to see if you are using the latest version.
 
 ###### December 9, 2013
 - Domains are now always treated as lowercase, preventing matching errors
