@@ -22,7 +22,7 @@ function hostcontrol_getConfigArray()
             "Type" => "text",
             "Description" => "You can find your API key in the Reseller Area, at the bottom of the Dashboard &rarr; Label page."
         ),
-        "AlternativePort"	=> array(
+        "AlternativePort"   => array(
             "FriendlyName" => "Use Alternative Connect Port",
             "Type" => "yesno",
             "Description" => "Enable this setting if you are experiencing any connection/timeout "
@@ -30,7 +30,7 @@ function hostcontrol_getConfigArray()
             . "This setting will cause the module to connect to Hostcontrol on port 14739 and "
             . "may resolve 'no response received' messages."
         ),
-        "DebugMode"	=> array(
+        "DebugMode" => array(
             "FriendlyName" => "Use Debug Mode",
             "Type" => "yesno",
             "Description" => "Debug mode provides extensive information when an error occurs. "
@@ -44,8 +44,8 @@ function hostcontrol_getConfigArray()
         ),
         "Updates" => array(
             "Description" => "Please check our site regularly to see if there is a new version
-							  of this registrar module available for you.<br />
-							   - " . $download_text . "<br /> - " . $visit_changelog
+                              of this registrar module available for you.<br />
+                               - " . $download_text . "<br /> - " . $visit_changelog
         ),
     );
 
@@ -104,6 +104,7 @@ function hostcontrol_install_db()
  */
 function hostcontrol_RegisterDomain($params = array())
 {
+
     $api_client = new HostControlAPIClient(HostControlHelper::getApiUrl($params), $params['ApiKey']);
     $domainname = strtolower($params["sld"] . "." . $params["tld"]);
 
@@ -116,12 +117,13 @@ function hostcontrol_RegisterDomain($params = array())
     {
         return array('error' => 'Could not create account for your domain: ' . $e->getMessage());
     }
-
-    $interval = $params["regperiod"]*12;
+    //interval changed to 12 month to bypass domain register for more than 1 years error
+    $interval = 12;
     $privacy_protect = (empty($params["idprotection"])?false:true);
 
     try
     {
+        
         $api_client->domain->register(
             $hostcontrol_customer_id,
             $domainname,
@@ -135,6 +137,30 @@ function hostcontrol_RegisterDomain($params = array())
         HostControlHelper::debugLog($params, 'register-domain', $request, $e);
 
         return array('error' => $e->getMessage());
+    }
+
+    //do renew for n-1 registeration period 
+    $regp=$params["regperiod"];
+    if ($regp>1) {
+ 
+        for ($i=0 ;$i<$regp-1 ; $i++) { 
+            
+            $interval = 12;
+
+            try
+            {
+                
+                $api_client->domain->renew($domainname, $interval);
+            }
+            catch(HostControlAPIClientError $e)
+            {
+                HostControlHelper::debugLog($params, 'renew-domain', array($domainname, $interval), $e);
+                return array('error' => $e->getMessage());
+            }
+
+
+
+        }
     }
 
     /* It seems that domain registration succeeded, now update nameservers */
@@ -238,17 +264,29 @@ function hostcontrol_RenewDomain($params)
 {
     $api_client = new HostControlAPIClient(HostControlHelper::getApiUrl($params), $params['ApiKey']);
     $domainname = strtolower($params["sld"] . "." . $params["tld"]);
-    $interval = $params["regperiod"]*12;
+    $interval =12;
+    $regp=$params["regperiod"];
+	
+    if ($regp>=1) {
+ 
+        for ($i=0 ;$i<$regp ; $i++) { 
 
-    try
-    {
-        $api_client->domain->renew($domainname, $interval);
+            try
+            {
+                
+                $api_client->domain->renew($domainname, $interval);
+            }
+            catch(HostControlAPIClientError $e)
+            {
+                HostControlHelper::debugLog($params, 'renew-domain', array($domainname, $interval), $e);
+                return array('error' => $e->getMessage());
+            }
+
+
+
+        }
     }
-    catch(HostControlAPIClientError $e)
-    {
-        HostControlHelper::debugLog($params, 'renew-domain', array($domainname, $interval), $e);
-        return array('error' => $e->getMessage());
-    }
+    
 
     return true;
 }

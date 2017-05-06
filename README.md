@@ -13,7 +13,11 @@
 6. Click the Activate button
 7. Insert your API key and click Save
 
+
 ### Changelog
+###### May 06, 2017 [ by ServerPars R&D team ]
+ - Solving renewal problem on orders that have more than one year billing cycle duration.
+
 ###### July 30, 2015
  - Tested v6.0 compatibility
  - Created check to determine if tld has locking-support
